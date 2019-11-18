@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Slide In Effect</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <h2>Slide in on Scroll</h2>
+    <p><img src="images/africa.jpg" class="align-left slide-in checkSlide" alt="">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore quasi doloremque fugit cupiditate praesentium
+        quibusdam atque repellat cumque quia? Suscipit assumenda, nulla autem a corrupti fuga illo similique aliquam
+        totam?/p>
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias a doloribus quod ab maiores cupiditate
+            excepturi numquam dolore laudantium quis, doloremque ut sed accusantium eum? Vel, commodi assumenda? Eius
+            hic aspernatur inventore magni, culpa delectus, ipsam voluptate fugiat dolorem rerum, fuga accusamus
+            expedita excepturi obcaecati non deleniti quam unde. Adipisci.
+            <img src="images/dog.jpg" class="align-right slide-in checkSlide" alt="">
+        </p>
+        <p> <img src="images/gear.jpg" class="align-left slide-in checkSlide" alt="">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum in praesentium aperiam laborum quasi. Dolore
+            accusantium, iste pariatur, a delectus, necessitatibus voluptatem voluptate explicabo assumenda tenetur
+            quibusdam obcaecati autem laborum aliquam rerum corporis similique! Quisquam vero dignissimos sequi quam
+            maiores alias ipsam, qui, repudiandae quod rem voluptatem perspiciatis, recusandae corrupti. Suscipit ab
+            voluptates nostrum eveniet porro cupiditate nisi eum veritatis.</p>
+
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae reiciendis aliquam ipsa sapiente architecto
+            alias? Facere itaque, dolor impedit ratione earum iusto voluptatibus labore doloremque adipisci voluptas
+            porro blanditiis atque distinctio quae vero ex dolore modi ipsum nesciunt assumenda mollitia alias non.
+            Dignissimos vero rem quae quasi cupiditate, unde exercitationem
+            vel ad illo temporibus, aliquid architecto
+            expedita maiores facere tenetur, earum impedit! Ab consequuntur inventore corporis, aliquam sint minima
+            culpa laudantium voluptatibus animi enim ipsa magni impedit, corrupti nihil quos.<img
+                src="images/the-smell-of.jpg" class="align-right slide-in checkSlide" alt=""></p>
+        <script>
+            function debounce(func, wait = 20, immediate = true) {
+                var timeout;
+                return function () {
+                    var context = this, args = arguments;
+                    var later = function () {
+                        timeout = null;
+                        if (!immediate) func.apply(context, args);
+                    };
+                    var callNow = immediate && !timeout;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                    if (callNow) func.apply(context, args);
+                };
+            };
+            const sliderImages = document.querySelectorAll('.slide-in');
+
+            function checkSlide(e) {
+                //console.count(e);
+                sliderImages.forEach(sliderImage => {
+                    // half way through the image
+                    const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2;
+                    // bottom of the image
+                    const imageBottom = sliderImage.offsetTop + sliderImage.height;
+                    const isHalfShown = slideInAt > sliderImage.offsetTop;
+                    const isNotScrolledPast = window.scrollY < imageBottom;
+                    console.log(slideInAt);
+                    if (isHalfShown && isNotScrolledPast) {
+                        sliderImage.classList.add('active');
+                    } else {
+                        sliderImage.classList.remove('active');
+                    }
+                });
+            }
+            window.addEventListener('scroll', debounce(checkSlide));
+
+
+
+        </script>
+</body>
+
+</html>
